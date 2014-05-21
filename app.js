@@ -1,3 +1,7 @@
+/* Links de interres
+    authentication: http://carlosazaustre.es/blog/registro-y-autorizacion-de-usuarios-en-node-js-con-twitter-y-facebook/
+*/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
