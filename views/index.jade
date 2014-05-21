@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p probando chat simple con node js y  #{title}
+  form(action="/mensaje", method='post')
+    .entrada
+      label Mensaje
+      input(type="text", name="mensaje")
+  .mensajes
+    if mensajes
+      for mensaje in mensajes
+        p remitente: #{mensaje.nombre} mensaje: #{mensaje.mensaje}
