@@ -8,7 +8,8 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var moongose = require('mongoose');
+var mongoose = require('mongoose');
+require('./models/mensajes');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -59,6 +60,13 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+mongoose.connect('mongodb://localhost/chat',
+                 function (err, res) {
+                     if(err) throw err;
+                     console.log('Conectado con éxito a la BD');
+});
+
 
 
 module.exports = app;

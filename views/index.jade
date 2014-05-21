@@ -5,9 +5,12 @@ block content
   p probando chat simple con node js y  #{title}
   form(action="/mensaje", method='post')
     .entrada
+      label Remitente
+      input(type="text", name="remitente")
       label Mensaje
       input(type="text", name="mensaje")
+      input(type='submit',value='enviar')
   .mensajes
     if mensajes
       for mensaje in mensajes
-        p remitente: #{mensaje.nombre} mensaje: #{mensaje.mensaje}
+        p remitente: #{mensaje.remitente} mensaje: #{mensaje.mensaje}
