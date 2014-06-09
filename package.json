@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "autobahn": "^0.9.3",
     "body-parser": "~1.0.0",
     "cookie-parser": "~1.0.1",
     "debug": "~0.7.4",
@@ -15,6 +16,7 @@
     "morgan": "~1.0.0",
     "nodemon": "^1.0.19",
     "passport": "^0.2.0",
-    "static-favicon": "~1.0.0"
+    "static-favicon": "~1.0.0",
+    "when": "^3.2.3"
   }
 }
