@@ -3,14 +3,14 @@ extends layout
 block content
   h1= title
   p probando chat simple con node js y  #{title}
-  form(action="/mensaje", method='post')
-    .entrada
-      label Remitente
-      input(type="text", name="remitente")
-      label Mensaje
-      input(type="text", name="mensaje")
-      input(type='submit',value='enviar')
+  .entrada
+    label Remitente
+    input#from(type="text", name="remitente")
+    label Mensaje
+    input#message(type="text", name="mensaje")
+    button(value='enviar', onclick="envia_mensaje();") Enviar
   .mensajes
     if mensajes
       for mensaje in mensajes
-        p remitente: #{mensaje.remitente} mensaje: #{mensaje.mensaje}
+        p from: #{mensaje.from} mensaje: #{mensaje.mensaje}
+  div#mensaje_servidor

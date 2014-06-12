@@ -15,8 +15,8 @@ var ChatSchema = new Schema({
 });
 */
 var ChatSchema = new Schema({
-    remitente: String,
-    to: [String],
+    from: String,
+    to: String,
     mensaje: String,
     fecha_envio: { type: Date, default: Date.now },
     fecha_recibido: { type: Date },

@@ -1,33 +1,44 @@
 var connection = new autobahn.Connection({
-         url: 'ws://127.0.0.1:9000/',
+         url: 'ws://10.1.47.232:9000/',
          realm: 'realm1'
       });
 
 connection.onopen = function (session) {
-
+   console.log("abierto?");
    // 1) subscribe to a topic
    function onevent(args) {
-      console.log("Event:", args);
+      console.log(args);
+      if (args[3] != session.id)
+         addMensaje(args);
    }
-   session.subscribe('com.myapp.hello', onevent);
-
-   // 2) publish an event
-   session.publish('com.myapp.hello', ['Hello, world!']);
-
-   // 3) register a procedure for remoting
-   function add2(args) {
-      operacion = args[0] + args[1];
-      session.publish('com.myapp.hello', ['el resultado es ... ?']);
-      return "el resultado es: " + operacion;
-   }
-   session.register('com.myapp.add2', add2);
-
-   // 4) call a remote procedure
-   session.call('com.myapp.add2', [2, 3]).then(
-      function (res) {
-         console.log("Result:", res);
-      }
-   );
+   session.subscribe('com.chat.saul', onevent);
 };
-
 connection.open();
+
+
+   function envia_mensaje(){
+         var session = connection.session;
+         var from  = $('#from').val();
+         var message  = $('#message').val();
+         session.call('com.server.msgnuevo', [from, 'saul', message]).then(
+            function (res) {
+               console.log(res);
+               /*if ( res != 0 ){
+                  console.log(res);
+                  if (res == "spam"){
+                     $('#mensaje_servidor').html("<h1>No hagas spam</h1>");
+                  }else{
+                     addMensaje(res);
+                     res.push(session.id);
+                     session.publish('com.chat.saul', res, {}, {exclude_me: true});
+                  }
+               }*/
+            }
+         );
+   }
+
+
+function addMensaje(info){
+   html = "<p>from: " + info[1].from + " mensaje: " + info[1].mensaje + "</p>";
+   $('.mensajes').append(html);
+}
