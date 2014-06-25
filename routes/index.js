@@ -34,12 +34,11 @@ function msgNuevo(args){
         return "spam";
     }
     var chat = new Chat(mensaje);
-    var aux;
     chat.save(function (err){
         if (!err){
-            aux = true;
+            enviarRespuesta(true);
         }else
-            aux = false;
+            enviarRespuesta(false);
     });
     if (aux)
         return [new Date().toString(), mensaje];
